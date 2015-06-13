@@ -75,7 +75,6 @@ typedef struct __easyspi_public_data
   uint8_t lastChipSelect;
 } EASYSPI_DATA;
 
-static EASYSPI_DATA *tempData;
 
 /* Private functions */
 static void EASYSPI_EnableTxInterrupt();
@@ -90,7 +89,6 @@ void EASYSPI_Config(EASYSPI_DATA *self);
 void EASYSPI_ChipSelect(EASYSPI_DATA *self, uint8_t index);
 void EASYSPI_ChipDeselect(EASYSPI_DATA *self, uint8_t index);
 
-void EASYSPI_Write(EASYSPI_DATA *self, uint8_t chip_select, uint8_t *data, uint16_t len);
-void EASYSPI_Read(EASYSPI_DATA *self, uint8_t chip_select, uint8_t *data, uint16_t len);
+void EASYSPI_Transceive(EASYSPI_DATA *self, uint8_t chip_select, uint8_t *data, uint16_t len);
 
 #endif

@@ -1,5 +1,7 @@
 #include "easy_spi.h"
 
+static EASYSPI_DATA *tempData;
+
 void EASYSPI_Init(EASYSPI_DATA *self)
 {
   self->isBusy = 0;
@@ -169,9 +171,14 @@ void EASYSPI_ChipDeselect(EASYSPI_DATA *self, uint8_t index)
   GPIO_WriteBit(self->pinCS[index].port, self->pinCS[index].pin, Bit_SET);
 }
 
-void EASYSPI_Write(EASYSPI_DATA *self, uint8_t chip_select, uint8_t *data, uint16_t len)
+void EASYSPI_Transceive(EASYSPI_DATA *self, uint8_t chip_select, uint8_t *data, uint16_t len)
 {
   int i;
+  
+  if(len > EASYSPI_BUFFER_SIZE)
+  {
+    len = EASYSPI_BUFFER_SIZE;
+  }
   
   while(self->isBusy){}
   
@@ -205,6 +212,8 @@ void EASYSPI_Write(EASYSPI_DATA *self, uint8_t chip_select, uint8_t *data, uint1
     data[i] = self->dataBuffer[len - 1 - i];
   }
 }
+      
+
 
 void SPI1_IRQHandler(void)
 {

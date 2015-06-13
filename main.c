@@ -2,6 +2,7 @@
 #include "common.h"
 
 #include "easy_spi.h"
+#include "L3GD20.h"
 
 #define BUTTON_GPIO             GPIOA
 #define BUTTON_GPIO_PERIPH      RCC_AHBPeriph_GPIOA
@@ -243,7 +244,7 @@ void EXTI0_IRQHandler(void)
 
 int main(void)
 {
-  __IO uint16_t byte0, byte1;
+  __IO uint8_t byte0, byte1;
   
   
   uint8_t data[2];
@@ -251,12 +252,22 @@ int main(void)
   EXTI0_Config();
   
   EASYSPI_DATA spi_data;
+  L3GD20_DATA l3gd20_data;
   
   EASYSPI_Init(&spi_data);
   EASYSPI_SetDefaults(&spi_data);
   EASYSPI_Config(&spi_data);
   
+  L3GD20_Init(&l3gd20_data);
+  L3GD20_AssignSpi(&l3gd20_data, &spi_data, 0);
+  
+  
+  
   write_spi = 1;
+  
+  
+  L3GD20_Config(&l3gd20_data);
+  
   
   
   /* Infinite loop */
@@ -269,13 +280,9 @@ int main(void)
       // to Slave:    0x8F 0x00
       // from Slave:  0x00 0xD4
       
-      data[0] = 0x8F;
-      data[1] = 0;
+      byte0 = L3GD20_ReadStatus(&l3gd20_data);
       
-      EASYSPI_Write(&spi_data, 0, data, 2);
-      
-      byte0 = data[0];
-      byte1 = data[1];
+      byte1 = L3GD20_CheckWhoIAm(&l3gd20_data);
       
       asm("nop");
       

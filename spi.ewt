@@ -2120,6 +2120,12 @@
       <name>$PROJ_DIR$\easy_spi.h</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\L3GD20.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\L3GD20.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\main.c</name>
     </file>
   </group>
