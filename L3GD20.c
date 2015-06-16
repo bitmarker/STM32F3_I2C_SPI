@@ -30,7 +30,7 @@ void L3GD20_AssignSpi(L3GD20_DATA *self, EASYSPI_DATA *spi, uint8_t chipSelect)
 void L3GD20_ReadData(L3GD20_DATA *self, uint8_t addr, uint8_t *data, uint8_t len)
 {
   int i;
-  uint8_t tempData[EASYSPI_BUFFER_SIZE];
+  uint8_t tempData[L3GD20_BUFFER_SIZE];
   
   /* Bit 0 is read bit */
   /* Bit 1 is multi bit */
@@ -48,7 +48,7 @@ void L3GD20_ReadData(L3GD20_DATA *self, uint8_t addr, uint8_t *data, uint8_t len
     tempData[i + 1] = 0x00;
   }
   
-  EASYSPI_Transceive(self->spi, self->chipSelect, tempData, 2);
+  self->spi->transceive(self->spi, self->chipSelect, tempData, len + 1);
   
   for(i = 0; i < len; i++)
   {
@@ -60,7 +60,7 @@ void L3GD20_WriteData(L3GD20_DATA *self, uint8_t addr, uint8_t *data, uint8_t le
 {
   int i;
   
-  uint8_t tempData[EASYSPI_BUFFER_SIZE];
+  uint8_t tempData[L3GD20_BUFFER_SIZE];
   
   /* Bit 0 is read bit */
   /* Bit 1 is multi bit */
@@ -78,17 +78,13 @@ void L3GD20_WriteData(L3GD20_DATA *self, uint8_t addr, uint8_t *data, uint8_t le
     tempData[i + 1] = data[i];
   }
   
-  EASYSPI_Transceive(self->spi, self->chipSelect, tempData, len + 1);
-  
-  for(i = 0; i < len; i++)
-  {
-    data[i] = tempData[i + 1];
-  }
+  self->spi->transceive(self->spi, self->chipSelect, tempData, len + 1);
 }
 
-void L3GD20_Config(L3GD20_DATA *self)
+RESULT L3GD20_Config(L3GD20_DATA *self)
 {
   uint8_t reg1 = 0x00;
+  uint8_t tmp = 0x00;
   
   volatile uint8_t temp;
   
@@ -97,28 +93,46 @@ void L3GD20_Config(L3GD20_DATA *self)
   reg1 |= (self->powerMode & 0x01) << 3;
   reg1 |= (self->axisEnable & 0x07);
   
-  L3GD20_WriteData(self, 0x20, &reg1, 1);
+  tmp = reg1;
+  
+  L3GD20_WriteData(self, L3GD20_CMD_CTRL_REG1, &reg1, 1);
+  
+  CALL_FUNC(self->wait_ms, 1);
+  
+  L3GD20_ReadData(self, L3GD20_CMD_CTRL_REG1, &reg1, 1);
+  
+  if(tmp != reg1)
+  {
+#ifdef DEBUG
+    printf("tmp(%X) != reg1(%X)\n", tmp, reg1);
+#endif
+    return ERROR;
+  }
+  
+  CALL_FUNC(self->wait_ms, 5);
+  
+  return SUCCESS;
 }
 
 uint8_t L3GD20_ReadStatus(L3GD20_DATA *self)
 {
   uint8_t ret;
   
-  L3GD20_ReadData(self, 0x27, &ret, 1);
+  L3GD20_ReadData(self, L3GD20_CMD_STATUS, &ret, 1);
   
   return ret;
 }
 
-uint8_t L3GD20_CheckWhoIAm(L3GD20_DATA *self)
+RESULT L3GD20_CheckWhoIAm(L3GD20_DATA *self)
 {
   uint8_t ret;
   
-  L3GD20_ReadData(self, 0x0F, &ret, 1);
+  L3GD20_ReadData(self, L3GD20_CMD_WHOAMI, &ret, 1);
   
-  if(ret == 0xD4)
+  if(ret == L3GD20_RES_WHOAMI)
   {
-    return 1;
+    return SUCCESS;
   }
   
-  return 0;
+  return ERROR;
 }

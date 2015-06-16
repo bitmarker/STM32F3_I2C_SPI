@@ -19,7 +19,7 @@
           
           
           
-        <Column0>185</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
+        <Column0>187</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
       </Workspace>
       <Disassembly>
         <col-names>
@@ -33,7 +33,7 @@
         <DisasmHistory/>
         
         
-      <ShowCodeCoverage>1</ShowCodeCoverage><ShowInstrProfiling>1</ShowInstrProfiling></Disassembly>
+      <PreferedWindows><Position>2</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows/></PreferedWindows><ShowCodeCoverage>1</ShowCodeCoverage><ShowInstrProfiling>1</ShowInstrProfiling></Disassembly>
       <QuickWatch>
         <col-names>
           
@@ -51,7 +51,7 @@
           
           
           
-        <item>reg1</item><item>spiDataBuffer[0]</item><item>byte0</item><item>spiDataBuffer[BUFFER_SIZE]</item></QWatchHistory>
+        <item>data</item><item>reg1</item><item>spiDataBuffer[0]</item><item>byte0</item><item>spiDataBuffer[BUFFER_SIZE]</item></QWatchHistory>
         <PreferedWindows>
           
           
@@ -67,12 +67,12 @@
           <Windows/>
         </PreferedWindows>
       </Register>
-    <WATCH_1><expressions><item>reg1</item><item></item></expressions><col-names><item>Expression</item><item>Location</item><item>Type</item><item>Value</item></col-names><col-widths><item>100</item><item>150</item><item>100</item><item>100</item></col-widths></WATCH_1></Static>
+    <WATCH_1><expressions><item>reg1</item><item></item></expressions><col-names><item>Expression</item><item>Location</item><item>Type</item><item>Value</item></col-names><col-widths><item>100</item><item>150</item><item>100</item><item>100</item></col-widths></WATCH_1><TerminalIO><InputSource>1</InputSource><InputMode>10</InputMode><Filename>$PROJ_DIR$\TermIOInput.txt</Filename><InputEcho>1</InputEcho><ShowReset>0</ShowReset></TerminalIO></Static>
     <Windows>
       
       
       
-    <Wnd1>
+    <Wnd0>
         <Tabs>
           <Tab>
             <Identity>TabID-29166-21188</Identity>
@@ -86,9 +86,9 @@
             <Factory>Build</Factory>
             <Session/>
           </Tab>
-        </Tabs>
+        <Tab><Identity>TabID-22694-3134</Identity><TabName>Terminal I/O</TabName><Factory>TerminalIO</Factory><Session/></Tab></Tabs>
         
-      <SelectedTab>0</SelectedTab></Wnd1><Wnd3>
+      <SelectedTab>2</SelectedTab></Wnd0><Wnd1>
         <Tabs>
           <Tab>
             <Identity>TabID-7147-21191</Identity>
@@ -100,30 +100,20 @@
           </Tab>
         </Tabs>
         
-      <SelectedTab>0</SelectedTab></Wnd3><Wnd6>
-        <Tabs>
-          <Tab>
-            <Identity>TabID-17895-21195</Identity>
-            <TabName>Disassembly</TabName>
-            <Factory>Disassembly</Factory>
-            <Session/>
-          </Tab>
-        </Tabs>
-        
-      <SelectedTab>0</SelectedTab></Wnd6><Wnd7><Tabs><Tab><Identity>TabID-11210-1345</Identity><TabName>Watch 1</TabName><Factory>WATCH_1</Factory></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd7></Windows>
+      <SelectedTab>0</SelectedTab></Wnd1><Wnd2><Tabs><Tab><Identity>TabID-11210-1345</Identity><TabName>Watch 1</TabName><Factory>WATCH_1</Factory></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd2><Wnd4><Tabs><Tab><Identity>TabID-1789-6578</Identity><TabName>Quick Watch</TabName><Factory>QuickWatch</Factory></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd4></Windows>
     <Editor>
       
       
       
       
-    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\easy_spi.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>95</SelStart2><SelEnd2>114</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\easy_spi.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>165</YPos2><SelStart2>5583</SelStart2><SelEnd2>5583</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Libraries\STM32F30x_StdPeriph_Driver\src\stm32f30x_spi.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>1212</YPos2><SelStart2>51416</SelStart2><SelEnd2>51427</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\common.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>126</SelStart2><SelEnd2>126</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Libraries\STM32F30x_StdPeriph_Driver\inc\stm32f30x_rcc.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>469</YPos2><SelStart2>21944</SelStart2><SelEnd2>21944</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Libraries\CMSIS\Device\ST\STM32F30x\Include\stm32f30x.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>169</YPos2><SelStart2>20888</SelStart2><SelEnd2>20897</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Libraries\STM32F30x_StdPeriph_Driver\inc\stm32f30x_gpio.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>266</YPos2><SelStart2>11084</SelStart2><SelEnd2>11084</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\stm32f30x_it.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>0</SelStart2><SelEnd2>0</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\L3GD20.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>81</YPos2><SelStart2>2116</SelStart2><SelEnd2>2116</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\L3GD20.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>285</SelStart2><SelEnd2>285</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>271</YPos2><SelStart2>8575</SelStart2><SelEnd2>8575</SelEnd2></Tab><ActiveTab>10</ActiveTab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\easy_spi.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>40</YPos2><SelStart2>2005</SelStart2><SelEnd2>2005</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Libraries\STM32F30x_StdPeriph_Driver\src\stm32f30x_spi.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>1212</YPos2><SelStart2>51416</SelStart2><SelEnd2>51427</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Libraries\STM32F30x_StdPeriph_Driver\inc\stm32f30x_rcc.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>469</YPos2><SelStart2>21944</SelStart2><SelEnd2>21944</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Libraries\CMSIS\Device\ST\STM32F30x\Include\stm32f30x.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>473</YPos2><SelStart2>38932</SelStart2><SelEnd2>38943</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Libraries\STM32F30x_StdPeriph_Driver\inc\stm32f30x_gpio.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>266</YPos2><SelStart2>11084</SelStart2><SelEnd2>11084</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\easy_spi.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>7020</SelStart2><SelEnd2>7020</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\common.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>357</SelStart2><SelEnd2>357</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\stm32f30x_it.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>0</SelStart2><SelEnd2>0</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\L3GD20.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>79</YPos2><SelStart2>2055</SelStart2><SelEnd2>2055</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\L3GD20.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>0</YPos2><SelStart2>493</SelStart2><SelEnd2>513</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>102</YPos2><SelStart2>2063</SelStart2><SelEnd2>2063</SelEnd2></Tab><ActiveTab>10</ActiveTab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
     <Positions>
       
       
       
       
       
-    <Top><Row0><Sizes><Toolbar-01C0CAE0><key>iaridepm.enu1</key></Toolbar-01C0CAE0></Sizes></Row0><Row1><Sizes><Toolbar-12A1B220><key>debuggergui.enu1</key></Toolbar-12A1B220></Sizes></Row1><Row2><Sizes><Toolbar-12A19DD0><key>armstlink.enu1</key></Toolbar-12A19DD0></Sizes></Row2></Top><Left><Row0><Sizes><Wnd3><Rect><Top>-2</Top><Left>-2</Left><Bottom>574</Bottom><Right>259</Right><x>-2</x><y>-2</y><xscreen>81</xscreen><yscreen>148</yscreen><sizeHorzCX>48884</sizeHorzCX><sizeHorzCY>176190</sizeHorzCY><sizeVertCX>157514</sizeVertCX><sizeVertCY>685714</sizeVertCY></Rect></Wnd3></Sizes></Row0></Left><Right><Row0><Sizes><Wnd6><Rect><Top>-2</Top><Left>-2</Left><Bottom>574</Bottom><Right>529</Right><x>-2</x><y>-2</y><xscreen>81</xscreen><yscreen>148</yscreen><sizeHorzCX>48884</sizeHorzCX><sizeHorzCY>176190</sizeHorzCY><sizeVertCX>320459</sizeVertCX><sizeVertCY>685714</sizeVertCY></Rect></Wnd6></Sizes></Row0><Row1><Sizes><Wnd7><Rect><Top>-2</Top><Left>527</Left><Bottom>574</Bottom><Right>927</Right><x>527</x><y>-2</y><xscreen>200</xscreen><yscreen>200</yscreen><sizeHorzCX>120700</sizeHorzCX><sizeHorzCY>238095</sizeHorzCY><sizeVertCX>241400</sizeVertCX><sizeVertCY>685714</sizeVertCY></Rect></Wnd7></Sizes></Row1></Right><Bottom><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>173</Bottom><Right>1659</Right><x>-2</x><y>-2</y><xscreen>1661</xscreen><yscreen>175</yscreen><sizeHorzCX>1002414</sizeHorzCX><sizeHorzCY>208333</sizeHorzCY><sizeVertCX>48884</sizeVertCX><sizeVertCY>176190</sizeVertCY></Rect></Wnd1></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+    <Top><Row0><Sizes><Toolbar-01C9CAE0><key>iaridepm.enu1</key></Toolbar-01C9CAE0></Sizes></Row0><Row1><Sizes><Toolbar-0B631390><key>debuggergui.enu1</key></Toolbar-0B631390></Sizes></Row1><Row2><Sizes><Toolbar-0B631458><key>armstlink.enu1</key></Toolbar-0B631458></Sizes></Row2></Top><Left><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>559</Bottom><Right>261</Right><x>-2</x><y>-2</y><xscreen>82</xscreen><yscreen>169</yscreen><sizeHorzCX>49072</sizeHorzCX><sizeHorzCY>176042</sizeHorzCY><sizeVertCX>157391</sizeVertCX><sizeVertCY>584375</sizeVertCY></Rect></Wnd1></Sizes></Row0></Left><Right><Row0><Sizes><Wnd2><Rect><Top>-2</Top><Left>-2</Left><Bottom>559</Bottom><Right>353</Right><x>-2</x><y>-2</y><xscreen>202</xscreen><yscreen>229</yscreen><sizeHorzCX>120886</sizeHorzCX><sizeHorzCY>238542</sizeHorzCY><sizeVertCX>212448</sizeVertCX><sizeVertCY>584375</sizeVertCY></Rect></Wnd2></Sizes></Row0><Row1><Sizes><Wnd4><Rect><Top>-2</Top><Left>351</Left><Bottom>559</Bottom><Right>688</Right><x>351</x><y>-2</y><xscreen>200</xscreen><yscreen>200</yscreen><sizeHorzCX>119689</sizeHorzCX><sizeHorzCY>208333</sizeHorzCY><sizeVertCX>201676</sizeVertCX><sizeVertCY>584375</sizeVertCY></Rect></Wnd4></Sizes></Row1></Right><Bottom><Row0><Sizes><Wnd0><Rect><Top>-2</Top><Left>-2</Left><Bottom>308</Bottom><Right>1673</Right><x>-2</x><y>-2</y><xscreen>1675</xscreen><yscreen>310</yscreen><sizeHorzCX>1002394</sizeHorzCX><sizeHorzCY>322917</sizeHorzCY><sizeVertCX>49072</sizeVertCX><sizeVertCY>176042</sizeVertCY></Rect></Wnd0></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
   </Desktop>
 </Project>
 

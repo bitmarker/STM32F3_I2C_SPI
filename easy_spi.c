@@ -7,6 +7,7 @@ void EASYSPI_Init(EASYSPI_DATA *self)
   self->isBusy = 0;
   self->rxCounter = 0;
   self->txCounter = 0;
+  self->transceive = EASYSPI_Transceive;
 }
 
 void EASYSPI_SetUpChipSelects(EASYSPI_DATA *self)
@@ -171,59 +172,47 @@ void EASYSPI_ChipDeselect(EASYSPI_DATA *self, uint8_t index)
   GPIO_WriteBit(self->pinCS[index].port, self->pinCS[index].pin, Bit_SET);
 }
 
-void EASYSPI_Transceive(EASYSPI_DATA *self, uint8_t chip_select, uint8_t *data, uint16_t len)
+void EASYSPI_Transceive(void *self, uint8_t chip_select, uint8_t *data, uint16_t len)
 {
-  int i;
+  while(((EASYSPI_DATA*)(self))->isBusy){}
   
-  if(len > EASYSPI_BUFFER_SIZE)
-  {
-    len = EASYSPI_BUFFER_SIZE;
-  }
+  ((EASYSPI_DATA*)(self))->rxCounter = 0;
+  ((EASYSPI_DATA*)(self))->txCounter = 0;
+  ((EASYSPI_DATA*)(self))->rxSize = len;
+  ((EASYSPI_DATA*)(self))->txSize = len;
   
-  while(self->isBusy){}
+  ((EASYSPI_DATA*)(self))->isBusy = 1;
   
-  self->rxCounter = len;
-  self->txCounter = len;
+  ((EASYSPI_DATA*)(self))->dataBuffer = data;
   
-  self->isBusy = 1;
-  
-  for(i = 0; i < len; i++)
-  {
-    self->dataBuffer[len - 1 - i] = data[i];
-  }
-  
-  tempData = self;
+  tempData = ((EASYSPI_DATA*)(self));
   
   EASYSPI_ChipSelect(self, chip_select);
   
   EASYSPI_EnableTxInterrupt(self);
   
   /* Waiting until TX FIFO is empty */
-  while (SPI_GetTransmissionFIFOStatus(self->spi) != SPI_TransmissionFIFOStatus_Empty) {}
+  while (SPI_GetTransmissionFIFOStatus(((EASYSPI_DATA*)(self))->spi) != SPI_TransmissionFIFOStatus_Empty) {}
   
   /* Wait busy flag */
-  while (SPI_I2S_GetFlagStatus(self->spi, SPI_I2S_FLAG_BSY) == SET) {}
+  while (SPI_I2S_GetFlagStatus(((EASYSPI_DATA*)(self))->spi, SPI_I2S_FLAG_BSY) == SET) {}
   
   /* Waiting until RX FIFO is empty */
-  while (SPI_GetReceptionFIFOStatus(self->spi) != SPI_ReceptionFIFOStatus_Empty) {}
-  
-  for(i = 0; i < len; i++)
-  {
-    data[i] = self->dataBuffer[len - 1 - i];
-  }
+  while (SPI_GetReceptionFIFOStatus(((EASYSPI_DATA*)(self))->spi) != SPI_ReceptionFIFOStatus_Empty) {}
 }
-      
-
 
 void SPI1_IRQHandler(void)
 {
   if(SPI_I2S_GetFlagStatus(tempData->spi, SPI_I2S_FLAG_RXNE) == SET)
   {
-    // Receive Buffer Not Empty
-    tempData->rxCounter--;
+    // Receive Buffer Not Empty, get the byte
     tempData->dataBuffer[tempData->rxCounter] = SPI_ReceiveData8(tempData->spi);
+    
+    /*printf("< %d: %X\n", tempData->rxCounter, tempData->dataBuffer[tempData->rxCounter]);*/
  
-    if(tempData->rxCounter == 0)
+    tempData->rxCounter++;
+    
+    if(tempData->rxCounter >= tempData->rxSize)
     {
       EASYSPI_ChipDeselect(tempData, tempData->lastChipSelect);
       tempData->isBusy = 0;
@@ -231,11 +220,14 @@ void SPI1_IRQHandler(void)
   }
   else if(SPI_I2S_GetFlagStatus(tempData->spi, SPI_I2S_FLAG_TXE) == SET)
   {
-    // Transmit Buffer Empty
-    if(tempData->txCounter > 0)
+    // Transmit Buffer Empty, send next byte
+    if(tempData->txCounter < tempData->txSize)
     {
-      SPI_SendData8(tempData->spi, tempData->dataBuffer[tempData->txCounter - 1]);
-      tempData->txCounter--;
+      SPI_SendData8(tempData->spi, tempData->dataBuffer[tempData->txCounter]);
+      
+      /*printf("> %d: %X\n", tempData->txCounter, tempData->dataBuffer[tempData->txCounter]);*/
+      
+      tempData->txCounter++;
     }
     else
     {

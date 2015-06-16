@@ -4,10 +4,6 @@
 #include <stdio.h>
 #include "common.h"
 
-#ifndef EASYSPI_BUFFER_SIZE
-  #define EASYSPI_BUFFER_SIZE 8
-#endif
-
 #ifndef EASYSPI_MAX_CHIP_SELECTS
   #define EASYSPI_MAX_CHIP_SELECTS 1
 #endif
@@ -51,6 +47,11 @@
 #endif
 
 
+/* Function pointers */
+typedef void (*EASYSPI_FUNC_TRANSCEIVE)(void*, uint8_t, uint8_t*, uint16_t);
+
+
+
 typedef struct __easyspi_pin_data
 {
   GPIO_TypeDef *port;
@@ -62,10 +63,12 @@ typedef struct __easyspi_pin_data
 
 typedef struct __easyspi_public_data
 {
-  volatile uint8_t rxCounter;
-  volatile uint8_t txCounter;
+  uint8_t rxCounter;
+  uint8_t txCounter;
+  uint8_t rxSize;
+  uint8_t txSize;
   volatile uint8_t isBusy;
-  uint8_t dataBuffer[EASYSPI_BUFFER_SIZE];
+  uint8_t *dataBuffer;
   SPI_TypeDef *spi;
   uint32_t spiPeriph;
   EASYSPI_PIN_DATA pinMOSI;
@@ -73,12 +76,17 @@ typedef struct __easyspi_public_data
   EASYSPI_PIN_DATA pinCLK;
   EASYSPI_PIN_DATA pinCS[EASYSPI_MAX_CHIP_SELECTS];
   uint8_t lastChipSelect;
+  EASYSPI_FUNC_TRANSCEIVE transceive;
 } EASYSPI_DATA;
 
 
 /* Private functions */
 static void EASYSPI_EnableTxInterrupt();
 static void EASYSPI_DisableTxInterrupt();
+static void EASYSPI_Transceive(void *self, uint8_t chip_select, uint8_t *data, uint16_t len);
+static void EASYSPI_ChipSelect(EASYSPI_DATA *self, uint8_t index);
+static void EASYSPI_ChipDeselect(EASYSPI_DATA *self, uint8_t index);
+
 
 /* Public functions */
 void EASYSPI_Init(EASYSPI_DATA *self);
@@ -86,9 +94,6 @@ void EASYSPI_CleanUp(EASYSPI_DATA *self);
 void EASYSPI_Idle(EASYSPI_DATA *self);
 void EASYSPI_SetDefaults(EASYSPI_DATA *self);
 void EASYSPI_Config(EASYSPI_DATA *self);
-void EASYSPI_ChipSelect(EASYSPI_DATA *self, uint8_t index);
-void EASYSPI_ChipDeselect(EASYSPI_DATA *self, uint8_t index);
 
-void EASYSPI_Transceive(EASYSPI_DATA *self, uint8_t chip_select, uint8_t *data, uint16_t len);
 
 #endif
